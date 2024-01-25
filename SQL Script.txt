@@ -1,0 +1,20 @@
+CREATE TABLE products (
+    product_id varchar(5),
+    product_name varchar(100),
+    category varchar(50),
+    subcategory varchar(50)
+   );
+   
+copy products from '/tmp/products.csv' delimiter ',' csv header
+   
+
+SELECT distinct 
+category
+into category
+FROM products
+
+select 
+row_number() over (order by category) as category_id
+,category 
+into category_table
+from category
